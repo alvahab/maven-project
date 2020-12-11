@@ -27,7 +27,7 @@ pipeline {
                     input message:'Approve PRODUCTION Deployment?'
                 }
 
-                build job: 'ars-deploy-to-staging'
+                build job: 'av-first-jenkins-job'
             }
             post {
                 success {
