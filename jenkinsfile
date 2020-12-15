@@ -1,42 +1,10 @@
-
 pipeline {
-    agent any
+    agent any 
     stages{
-        stage('Build'){
-            steps {
-                sh 'echo hello'
-            }
-            post {
-                success {
-                    echo 'successfull'
-                }
-            }
-        }
-        
-
-        stage ('Deploy to Staging'){
-            steps {
-                build job: 'av-deploy-to-staging'
-            }
-        }
-
-        stage ('Deploy to Production'){
-            steps{
-                timeout(time:5, unit:'DAYS'){
-                    input message:'Approve PRODUCTION Deployment okkkkkk?'
-                }
-
-                build job: 'av-jenkins-first-job'
-            }
-            post {
-                success {
-                    echo 'Code deployed to Production.-ars'
-                }
-
-                failure {
-                    echo ' Deployment failed.-ars'
-                }
-            }
-        }
-    }
-}
+    stage(Build){
+       steps{
+         bat 'mvn clean package'
+       }
+       }
+     }
+}     
